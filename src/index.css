@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   DESIGN TOKENS  (light + dark)
+   Civic identity: deep harbor teal (trust, water, government)
+   + warm marigold (energy, truck-art Karachi) as accent.
+   All colors are CSS variables so the whole app re-themes
+   instantly when the `.dark` class is toggled on <html>.
+   ============================================================ */
+:root {
+  --bg: #f5f6f4;
+  --bg-grad: #eaf1ee;
+  --surface: #ffffff;
+  --surface-2: #f4f6f5;
+  --text: #12201d;
+  --muted: #5b6a66;
+  --border: #e2e8e4;
+  --primary: #0d7a6f;
+  --primary-hover: #0a6259;
+  --primary-soft: #e3f4f0;
+  --primary-soft-text: #0a6259;
+  --ring: rgba(13, 122, 111, 0.25);
+  --accent: #e8912b;
+  --accent-soft: #fdf0dd;
+  --accent-soft-text: #93540d;
+  --danger: #d9455f;
+  --danger-soft: #fce8ec;
+  --danger-soft-text: #ad2f46;
+  --shadow: 0 1px 2px rgba(18,32,29,.05), 0 10px 28px -14px rgba(18,32,29,.18);
+}
+
+.dark {
+  --bg: #08120f;
+  --bg-grad: #0b1a16;
+  --surface: #101f1b;
+  --surface-2: #0c1815;
+  --text: #eaf3ef;
+  --muted: #8aa39b;
+  --border: #1d332c;
+  --primary: #2dd4bf;
+  --primary-hover: #5eead4;
+  --primary-soft: #123028;
+  --primary-soft-text: #7fe6d6;
+  --ring: rgba(45, 212, 191, 0.3);
+  --accent: #f2a93c;
+  --accent-soft: #2c2110;
+  --accent-soft-text: #f6c374;
+  --danger: #fb7185;
+  --danger-soft: #2c1219;
+  --danger-soft-text: #ff9fae;
+  --shadow: 0 1px 2px rgba(0,0,0,.35), 0 14px 34px -16px rgba(0,0,0,.65);
+}
+
+* { border-color: var(--border); }
+
+body {
+  @apply font-body antialiased;
+  background: var(--bg);
+  color: var(--text);
+  background-image:
+    radial-gradient(1000px 560px at 100% -8%, var(--bg-grad), transparent 65%),
+    radial-gradient(760px 420px at -8% 4%, var(--bg-grad), transparent 60%);
+  background-attachment: fixed;
+  transition: background-color .3s ease, color .3s ease;
+}
+
+h1, h2, h3, h4 { @apply font-display tracking-tight; color: var(--text); }
+
+/* Lattice motif — a nod to Karachi truck-art geometry, used instead of a generic dot grid */
+.civic-lattice {
+  background-image:
+    linear-gradient(135deg, var(--text) 1px, transparent 1px),
+    linear-gradient(45deg, var(--text) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+/* ============================================================
+   REUSABLE COMPONENT CLASSES
+   ============================================================ */
+@layer components {
+  .surface { background: var(--surface); }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition active:scale-[0.98];
+  }
+  .btn:focus-visible, .chip:focus-visible, .tab-btn:focus-visible {
+    outline: none; box-shadow: 0 0 0 3px var(--ring);
+  }
+  .btn-primary {
+    background: var(--primary); color: #fff;
+  }
+  .btn-primary:hover { background: var(--primary-hover); }
+  .btn-accent { background: var(--accent); color: #29190a; }
+  .btn-accent:hover { filter: brightness(1.06); }
+  .btn-outline {
+    background: var(--surface); color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { background: var(--surface-2); }
+  .btn-ghost { color: var(--muted); }
+  .btn-ghost:hover { background: var(--surface-2); color: var(--text); }
+  .btn-danger { background: var(--danger); color: #fff; }
+  .btn-danger:hover { filter: brightness(1.08); }
+
+  .input {
+    @apply w-full rounded-xl px-4 py-2.5 text-sm outline-none transition;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--ring); }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition;
+    background: var(--surface); color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .chip:hover { background: var(--surface-2); color: var(--text); }
+  .chip-active {
+    background: var(--primary) !important; color: #fff !important;
+    border-color: var(--primary) !important;
+  }
+
+  .soft-pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold;
+    background: var(--primary-soft); color: var(--primary-soft-text);
+  }
+  .accent-pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold;
+    background: var(--accent-soft); color: var(--accent-soft-text);
+  }
+  .danger-pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold;
+    background: var(--danger-soft); color: var(--danger-soft-text);
+  }
+
+  .tab-btn {
+    @apply rounded-lg px-3.5 py-2 text-sm font-semibold transition;
+    color: var(--muted);
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn-active { background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
+
+  .muted { color: var(--muted); }
+
+  /* Skeleton loading blocks */
+  .skeleton {
+    background: linear-gradient(90deg, var(--surface-2) 25%, var(--border) 37%, var(--surface-2) 63%);
+    background-size: 400% 100%;
+    animation: shimmer 1.4s ease infinite;
+    border-radius: .75rem;
+  }
+}
+
+@keyframes shimmer { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
+
+/* Leaflet tweaks */
+.leaflet-container { font-family: inherit; border-radius: 1rem; background: var(--surface-2); }
+.civic-pin {
+  display: grid; place-items: center; width: 30px; height: 30px;
+  border-radius: 999px 999px 999px 2px; transform: rotate(45deg);
+  border: 2px solid #fff; box-shadow: 0 3px 10px rgba(0,0,0,.35);
+}
+.civic-pin svg { transform: rotate(-45deg); }
+
+/* Animations */
+@keyframes fadeUp { from { opacity:0; transform: translateY(10px);} to {opacity:1; transform:none;} }
+.fade-up { animation: fadeUp .45s cubic-bezier(.22,1,.36,1) both; }
+
+@keyframes toastIn { from { opacity:0; transform: translateY(-8px) scale(.98);} to {opacity:1; transform:none;} }
+.toast-in { animation: toastIn .25s cubic-bezier(.22,1,.36,1) both; }
+
+@keyframes popIn { from { opacity:0; transform: scale(.92);} to {opacity:1; transform:none;} }
+.pop-in { animation: popIn .18s ease both; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; }
+
+/* Respect the OS-level "reduce motion" preference */
+@media (prefers-reduced-motion: reduce) {
+  .fade-up, .toast-in, .pop-in, .skeleton {
+    animation: none !important;
+  }
+  * { transition-duration: 0.01ms !important; }
+}
+
+/* Visually hidden until focused — lets keyboard users jump past the nav */
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 4000;
+  background: var(--primary); color: #fff;
+  padding: .75rem 1.25rem; border-radius: 0 0 .75rem 0;
+  font-weight: 700; font-size: .875rem;
+}
+.skip-link:focus { left: 0; }

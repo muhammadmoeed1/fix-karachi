@@ -1,0 +1,13 @@
+{
+  "name": "FixKarachi — Civic Issue Reporting Platform",
+  "short_name": "FixKarachi",
+  "description": "Report and track civic issues in Karachi — potholes, garbage, sewerage, streetlights and more — with a transparent credibility engine.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f5f6f4",
+  "theme_color": "#0d7a6f",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
