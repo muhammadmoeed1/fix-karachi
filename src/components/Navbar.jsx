@@ -47,7 +47,9 @@ export default function Navbar() {
             <>
               <NotificationBell />
               <Link to="/profile" className="btn btn-ghost !px-2.5" title="My profile" aria-label="My profile"><UserCircle2 size={18} /></Link>
-              <Link to="/report" className="btn btn-primary"><Plus size={16} /> Report</Link>
+              <Link to="/report" className="btn btn-primary !px-2.5 sm:!px-4" title="Report an issue" aria-label="Report an issue">
+                <Plus size={16} /> <span className="hidden sm:inline">Report</span>
+              </Link>
               <button onClick={handleLogout} className="btn btn-ghost !px-2.5" title="Log out" aria-label="Log out"><LogOut size={18} /></button>
             </>
           ) : (

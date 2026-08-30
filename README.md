@@ -146,6 +146,7 @@ fix-karachi/
 ├── tailwind.config.js          Theme config (dark mode, fonts)
 ├── postcss.config.js
 ├── vite.config.js
+├── vercel.json                 SPA rewrite so client-side routes don't 404 on Vercel
 ├── public/
 │   ├── favicon.svg
 │   ├── manifest.json           Web app manifest (installable PWA)
@@ -208,7 +209,10 @@ vercel --prod     # subsequent production deploys
 ```
 Or connect the GitHub repo directly at [vercel.com/new](https://vercel.com/new) —
 it auto-detects Vite (`npm run build`, output directory `dist`) and redeploys
-on every push to `main`.
+on every push to `main`. Client-side routes (e.g. a direct link to `/login`
+or `/report/:id`, or a mobile browser reloading a backgrounded tab) need an
+explicit rewrite so Vercel serves `index.html` instead of 404ing — that's
+what the committed `vercel.json` does.
 
 **Netlify**
 1. [app.netlify.com](https://app.netlify.com) → **Add new site → Import an
