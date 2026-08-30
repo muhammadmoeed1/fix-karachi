@@ -12,10 +12,13 @@
 import { seedUsers, seedReports } from './seed.js'
 
 // Versioned keys: bumping the suffix forces a clean reseed for anyone
-// with an older shape of data already in their browser.
-const USERS_KEY = 'fk_users_v2'
-const REPORTS_KEY = 'fk_reports_v2'
-const NOTIFICATIONS_KEY = 'fk_notifications_v2'
+// with an older shape of data already in their browser. Bumped to v3 here
+// because the deployed URL has served several different builds already,
+// and a browser that visited an earlier one keeps its stale seed forever
+// otherwise (initStore only seeds when the key is absent).
+const USERS_KEY = 'fk_users_v3'
+const REPORTS_KEY = 'fk_reports_v3'
+const NOTIFICATIONS_KEY = 'fk_notifications_v3'
 const SESSION_KEY = 'fk_session'
 
 const read = (key, fallback) => {

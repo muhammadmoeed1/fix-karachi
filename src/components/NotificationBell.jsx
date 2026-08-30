@@ -28,7 +28,7 @@ export default function NotificationBell() {
       {open && (
         <>
           <div className="fixed inset-0 z-[1900]" onClick={() => setOpen(false)} />
-          <div className="pop-in card absolute right-0 z-[1901] mt-2 max-h-96 w-80 overflow-y-auto p-2">
+          <div className="pop-in card fixed right-4 top-16 z-[1901] max-h-96 w-[min(320px,calc(100vw-2rem))] overflow-y-auto p-2">
             <p className="px-2 py-1.5 text-xs font-bold uppercase tracking-wide muted">Notifications</p>
             {notifications.length === 0 ? (
               <p className="p-4 text-center text-sm muted">You're all caught up.</p>
